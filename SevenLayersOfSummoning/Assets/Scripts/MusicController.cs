@@ -132,6 +132,9 @@ public class MusicController : MonoBehaviour {
 
 	public void resetMusic(){
 		StartCoroutine (fadeIn (neutralLayer));
+		demonIndex = -1;
+		shamanIndex = -1;
+		lastLayer = 4;
 	}
 
 	public void playStinger(string tag){
