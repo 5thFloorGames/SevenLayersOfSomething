@@ -36,12 +36,18 @@ public class GameController : MonoBehaviour {
 	void NewRound(){
 		print ("Layer is: " + layer);
 
-		// Destroy all bullets
+		DestroyBullets ();
 
 		// Reset player positions
 
 		// Update combos
 
 		// Countdown
+	}
+
+	void DestroyBullets(){
+		foreach(GameObject g in GameObject.FindGameObjectsWithTag("Bullet")){
+			Destroy(g);
+		}
 	}
 }
