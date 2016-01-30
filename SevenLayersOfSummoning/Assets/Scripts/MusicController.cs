@@ -3,9 +3,9 @@ using System.Collections;
 
 public class MusicController : MonoBehaviour {
 
-	public AudioSource[] DemonLayers;
+	public AudioSource[] demonLayers;
 	private int demonIndex = -1;
-	public AudioSource[] ShamanLayers;
+	public AudioSource[] shamanLayers;
 	private int shamanIndex = -1;
 	public AudioSource neutralLayer;
 	private GameController gameController;
@@ -69,23 +69,28 @@ public class MusicController : MonoBehaviour {
 	}
 
 	void addShamanLayer(){
-		print ("adding Shaman layer");
 		shamanIndex++;
-		StartCoroutine(fadeIn (ShamanLayers [shamanIndex]));
+		if (shamanLayers.Length <= shamanIndex) {
+			return;
+		}
+		StartCoroutine(fadeIn (shamanLayers [shamanIndex]));
 	}
 
 	void addDemonLayer(){
 		demonIndex++;
-		StartCoroutine(fadeIn (DemonLayers [demonIndex]));
+		if (demonLayers.Length <= demonIndex) {
+			return;
+		}
+		StartCoroutine(fadeIn (demonLayers [demonIndex]));
 	}
 	
 	void removeShamanLayer(){
-		StartCoroutine(fadeOut (ShamanLayers [shamanIndex]));
+		StartCoroutine(fadeOut (shamanLayers [shamanIndex]));
 		shamanIndex--;
 	}
 	
 	void removeDemonLayer(){
-		StartCoroutine(fadeOut (DemonLayers [demonIndex]));
+		StartCoroutine(fadeOut (demonLayers [demonIndex]));
 		demonIndex--;
 	}
 
