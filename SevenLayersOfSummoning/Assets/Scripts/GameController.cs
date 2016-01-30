@@ -32,14 +32,14 @@ public class GameController : MonoBehaviour {
 			layer--;
 			if(layer == 0){
 				print ("Shaman wins!");
-				Application.Quit();
+				layer = 4;
 			}
 		}
 		if (tag == "Shaman") {
 			layer++;
 			if(layer == 8){
 				print ("Demon wins!");
-				Application.Quit();
+				layer = 4;
 			}
 		}
 		NewRound ();
@@ -51,7 +51,8 @@ public class GameController : MonoBehaviour {
 
 		DestroyBullets ();
 
-		// Reset player positions
+		demon.transform.position = new Vector3 (0f, 6.6f, 0f);
+		shaman.transform.position = new Vector3 (0f, 3.5f, 0f);
 
 		KeyCode[] pattern1 = combo.newPatternPlayer1();
 		KeyCode[] pattern2 = combo.newPatternPlayer2();
