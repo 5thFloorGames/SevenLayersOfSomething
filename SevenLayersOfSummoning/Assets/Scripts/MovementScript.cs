@@ -7,10 +7,18 @@ public class MovementScript : MonoBehaviour {
 	public float moveSpeed = 1;
 	public int player = 1;
 	private float maxXposition = 10f;
+	private AudioClip[] injuries;
+	private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
 		rigid = GetComponent<Rigidbody2D> ();
+		if (tag == "Demon") {
+			injuries = Resources.LoadAll<AudioClip> ("Audio/Demon/Injury");
+		} else {
+			injuries = Resources.LoadAll<AudioClip> ("Audio/Shaman/Injury");
+		}
+		audioSource = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -22,6 +30,7 @@ public class MovementScript : MonoBehaviour {
 	}
 
 	public void BulletHit(){
+		audioSource.PlayOneShot (injuries[Random.Range(0, injuries.Length)]);
 		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().registerHit (tag);
 	}
 }
