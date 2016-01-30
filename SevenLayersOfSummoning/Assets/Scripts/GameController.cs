@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
@@ -8,6 +9,11 @@ public class GameController : MonoBehaviour {
 	private ComboCreator combo;
 	private GameObject demon;
 	private GameObject shaman;
+
+	void Awake() {
+		demon = GameObject.Find ("Demon");
+		shaman = GameObject.Find ("Shaman");
+	}
 
 	// Use this for initialization
 	void Start () {
