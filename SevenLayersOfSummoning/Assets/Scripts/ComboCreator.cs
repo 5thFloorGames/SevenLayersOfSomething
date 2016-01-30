@@ -16,7 +16,7 @@ public class ComboCreator : MonoBehaviour {
 		for (int i = 0; i < 4; i++) {
 			toPrint += pattern[i] + ", ";
 		}
-		print (toPrint);
+		//print (toPrint);
 	}
 
 	public KeyCode[] newPattern(){

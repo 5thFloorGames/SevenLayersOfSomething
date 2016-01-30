@@ -4,9 +4,9 @@ using System.Collections;
 public class MusicController : MonoBehaviour {
 
 	public AudioSource[] DemonLayers;
-	private int demonIndex = 0;
+	private int demonIndex = -1;
 	public AudioSource[] ShamanLayers;
-	private int shamanIndex = 0;
+	private int shamanIndex = -1;
 	public AudioSource neutralLayer;
 	private GameController gameController;
 	private int lastLayer = 4;
@@ -24,7 +24,7 @@ public class MusicController : MonoBehaviour {
 	public void updateLayer(int newLayer){
 		if (newLayer < lastLayer) {
 			if(newLayer < 4){
-				removeShamanLayer();
+				addShamanLayer();
 			} else if(newLayer > 4) {
 				removeDemonLayer();
 			} else {
@@ -34,10 +34,13 @@ public class MusicController : MonoBehaviour {
 			if(newLayer > 4){
 				addDemonLayer();
 			} else if (newLayer < 4) {
-				addShamanLayer();
+				removeShamanLayer();
 			} else {
 				shamanToNeutral ();
 			}
+		}
+		if (lastLayer == 4) {
+			StartCoroutine(fadeOut(neutralLayer));
 		}
 		lastLayer = newLayer;
 	}
@@ -47,7 +50,7 @@ public class MusicController : MonoBehaviour {
 		while (volume < 1f) {
 			volume += 0.01f;
 			source.volume = volume;
-			yield return new WaitForSeconds(0.05f);
+			yield return new WaitForSeconds(0.025f);
 		}
 	}
 
@@ -56,37 +59,38 @@ public class MusicController : MonoBehaviour {
 		while (volume > 0f) {
 			volume -= 0.01f;
 			source.volume = volume;
-			yield return new WaitForSeconds(0.05f);
+			yield return new WaitForSeconds(0.025f);
 		}	
 	}
 
 	void addShamanLayer(){
+		print ("adding Shaman layer");
 		shamanIndex++;
-		fadeIn (ShamanLayers [shamanIndex]);
+		StartCoroutine(fadeIn (ShamanLayers [shamanIndex]));
 	}
 
 	void addDemonLayer(){
 		demonIndex++;
-		fadeIn (DemonLayers [demonIndex]);
+		StartCoroutine(fadeIn (DemonLayers [demonIndex]));
 	}
 	
 	void removeShamanLayer(){
+		StartCoroutine(fadeOut (ShamanLayers [shamanIndex]));
 		shamanIndex--;
-		fadeOut (ShamanLayers [shamanIndex]);
 	}
 	
 	void removeDemonLayer(){
+		StartCoroutine(fadeOut (DemonLayers [demonIndex]));
 		demonIndex--;
-		fadeOut (DemonLayers [demonIndex]);
 	}
 
 	void demonToNeutral(){
 		removeDemonLayer ();
-		fadeIn (neutralLayer);
+		StartCoroutine(fadeIn (neutralLayer));
 	}
 
 	void shamanToNeutral(){
 		removeShamanLayer ();
-		fadeIn (neutralLayer);
+		StartCoroutine(fadeIn (neutralLayer));
 	}
 }
