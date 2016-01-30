@@ -6,7 +6,7 @@ public class MovementScript : MonoBehaviour {
 	private Rigidbody2D rigid;
 	public float moveSpeed = 1;
 	public int player = 1;
-	private float maxXposition = 9f;
+	private float maxXposition = 12.5f;
 
 	// Use this for initialization
 	void Start () {
