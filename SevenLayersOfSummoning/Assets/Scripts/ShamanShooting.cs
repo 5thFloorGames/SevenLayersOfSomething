@@ -25,4 +25,9 @@ public class ShamanShooting : MonoBehaviour {
 			comboPhase = 0;
 		}
 	}
+
+	
+	public void newPattern(KeyCode[] pattern){
+		pattern = pattern;
+	}
 }
