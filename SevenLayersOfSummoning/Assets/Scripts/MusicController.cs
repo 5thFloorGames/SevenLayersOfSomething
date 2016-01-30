@@ -9,7 +9,7 @@ public class MusicController : MonoBehaviour {
 	private int shamanIndex = -1;
 	public AudioSource neutralLayer;
 	private GameController gameController;
-	private int lastLayer = 4;
+	private int lastLayer = -1;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +22,10 @@ public class MusicController : MonoBehaviour {
 	}
 
 	public void updateLayer(int newLayer){
+		if (lastLayer == -1) {
+			lastLayer = newLayer;
+			return;
+		}
 		if (newLayer < lastLayer) {
 			if(newLayer < 4){
 				addShamanLayer();
@@ -50,7 +54,7 @@ public class MusicController : MonoBehaviour {
 		while (volume < 1f) {
 			volume += 0.01f;
 			source.volume = volume;
-			yield return new WaitForSeconds(0.025f);
+			yield return new WaitForSeconds(0.00927f);
 		}
 	}
 
@@ -59,7 +63,7 @@ public class MusicController : MonoBehaviour {
 		while (volume > 0f) {
 			volume -= 0.01f;
 			source.volume = volume;
-			yield return new WaitForSeconds(0.025f);
+			yield return new WaitForSeconds(0.00927f);
 		}	
 	}
 

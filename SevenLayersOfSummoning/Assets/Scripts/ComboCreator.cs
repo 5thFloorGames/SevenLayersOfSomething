@@ -26,4 +26,9 @@ public class ComboCreator : MonoBehaviour {
 		}
 		return pattern;
 	}
+
+	//Square  = joystick button 0
+	//	X       = joystick button 1
+	//		Circle  = joystick button 2
+	//		Triangle= joystick button 3
 }

@@ -4,7 +4,7 @@ using System.Collections;
 public class DemonShooting : MonoBehaviour {
 
 	public GameObject bullet;
-	private KeyCode[] pattern = {KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V};
+	private KeyCode[] pattern = {KeyCode.Joystick2Button0, KeyCode.Joystick2Button1, KeyCode.Joystick2Button2, KeyCode.Joystick2Button3};
 	private int comboPhase = 0;
 
 	// Use this for initialization

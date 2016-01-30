@@ -4,7 +4,7 @@ using System.Collections;
 public class ShamanShooting : MonoBehaviour {
 
 	public GameObject bullet;
-	private KeyCode[] pattern = {KeyCode.M, KeyCode.Comma, KeyCode.Period, KeyCode.Minus};
+	private KeyCode[] pattern = {KeyCode.Joystick1Button0, KeyCode.Joystick1Button1, KeyCode.Joystick1Button2, KeyCode.Joystick1Button3};
 	private int comboPhase = 0;
 
 	// Use this for initialization
