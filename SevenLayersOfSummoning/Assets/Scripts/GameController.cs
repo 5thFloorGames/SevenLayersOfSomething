@@ -4,10 +4,11 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 
 	public int layer = 4;
+	private MusicController music;
 
 	// Use this for initialization
 	void Start () {
-	
+		music = GetComponent<MusicController> ();
 	}
 	
 	// Update is called once per frame
@@ -19,14 +20,14 @@ public class GameController : MonoBehaviour {
 		if (tag == "Demon") {
 			layer--;
 			if(layer == 0){
-				print ("Demon wins!");
+				print ("Shaman wins!");
 				Application.Quit();
 			}
 		}
 		if (tag == "Shaman") {
 			layer++;
 			if(layer == 8){
-				print ("Shaman wins!");
+				print ("Demon wins!");
 				Application.Quit();
 			}
 		}
@@ -35,6 +36,7 @@ public class GameController : MonoBehaviour {
 
 	void NewRound(){
 		print ("Layer is: " + layer);
+		music.updateLayer (layer);
 
 		DestroyBullets ();
 
