@@ -20,6 +20,7 @@ public class PatternManager : MonoBehaviour {
 	int activeInt;
 
 	public void NewPattern(KeyCode[] newPattern) {
+		activeInt = 0;
 		pattern = newPattern;
 		ShowPattern ();
 		RefreshPattern ();

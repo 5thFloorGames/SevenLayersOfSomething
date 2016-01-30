@@ -30,6 +30,7 @@ public class ShamanShooting : MonoBehaviour {
 
 	
 	public void NewPattern(KeyCode[] newPattern){
+		comboPhase = 0;
 		pattern = newPattern;
 	}
 }

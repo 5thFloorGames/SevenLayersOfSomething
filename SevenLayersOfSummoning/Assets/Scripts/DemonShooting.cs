@@ -29,6 +29,7 @@ public class DemonShooting : MonoBehaviour {
 	}
 
 	public void NewPattern(KeyCode[] newPattern){
+		comboPhase = 0;
 		pattern = newPattern;
 	}
 }
