@@ -54,7 +54,7 @@ public class MusicController : MonoBehaviour {
 		while (volume < 1f) {
 			volume += 0.01f;
 			source.volume = volume;
-			print(source.time);
+			//print(source.time);
 			yield return new WaitForSeconds(0.00927f);
 		}
 	}

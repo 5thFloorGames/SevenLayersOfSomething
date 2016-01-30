@@ -15,20 +15,24 @@ public class PatternManager : MonoBehaviour {
 
 	KeyCode[] pattern;
 	Transform[] shapeList;
-
 	Dictionary<KeyCode, Sprite> matching;
+
+	int activeInt;
 
 	public void NewPattern(KeyCode[] newPattern) {
 		pattern = newPattern;
 		ShowPattern ();
+		RefreshPattern ();
 	}
 
 	public void CorrectButtonPressed() {
-
+		activeInt++;
+		RefreshPattern ();
 	}
 
 	public void ShotFired() {
-
+		activeInt = 0;
+		RefreshPattern ();
 	}
 
 	void ShowPattern() {
@@ -39,10 +43,20 @@ public class PatternManager : MonoBehaviour {
 		}
 	}
 
-	void StartDefaults() {
+	void RefreshPattern() {
+		int i = 0;
 		foreach (Transform shape in shapeList) {
-			shape.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
-			shape.GetComponent<Image>().color = futureColor;
+			if (i < activeInt) {
+				shape.GetComponent<Image>().color = completedColor;
+				shape.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+			} else if (i == activeInt) {
+				shape.GetComponent<Image>().color = activeColor;
+				shape.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
+			} else {
+				shape.GetComponent<Image>().color = futureColor;
+				shape.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+			}
+			i++;
 		}
 	}
 
@@ -57,17 +71,16 @@ public class PatternManager : MonoBehaviour {
 			{KeyCode.Joystick1Button3, triangle},
 			{KeyCode.Joystick2Button3, triangle}
 		};
-
 		shapeList = new Transform[4];
 		int i = 0;
 		foreach (Transform shape in transform.FindChild("Patterns")) {
 			shapeList[i] = shape;
+			shape.GetComponent<Image> ().sprite = cross;
+			shape.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+			shape.GetComponent<Image>().color = futureColor;
 			i++;
 		}
-		foreach (Transform shape in shapeList) {
-			shape.GetComponent<Image>().sprite = cross;
-		}
-		StartDefaults ();
+		activeInt = 0;
 	}
 
 	Sprite GetShape(KeyCode kc) {

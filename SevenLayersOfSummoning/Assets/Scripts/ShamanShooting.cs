@@ -4,17 +4,18 @@ using System.Collections;
 public class ShamanShooting : MonoBehaviour {
 
 	public GameObject bullet;
-	private KeyCode[] pattern = {KeyCode.Joystick1Button0, KeyCode.Joystick1Button1, KeyCode.Joystick1Button2, KeyCode.Joystick1Button3};
+	private KeyCode[] pattern;
 	private int comboPhase = 0;
-
-	// Use this for initialization
+	private PatternManager patternManager;
+	
 	void Start () {
-	
+		patternManager = GetComponent<PatternManager> ();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		if (Input.GetKeyDown((pattern [comboPhase]))) {
+			// correct button pressed
+			patternManager.CorrectButtonPressed();
 			comboPhase++;
 		}
 		if (comboPhase == 4) {
@@ -23,11 +24,12 @@ public class ShamanShooting : MonoBehaviour {
 			bulletrb.AddForce (transform.up * (-1) * 200f);
 			Physics2D.IgnoreCollision(firedBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 			comboPhase = 0;
+			patternManager.ShotFired();
 		}
 	}
 
 	
-	public void newPattern(KeyCode[] pattern){
-		pattern = pattern;
+	public void NewPattern(KeyCode[] newPattern){
+		pattern = newPattern;
 	}
 }

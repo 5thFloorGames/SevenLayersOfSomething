@@ -8,15 +8,14 @@ public class DemonShooting : MonoBehaviour {
 	private int comboPhase = 0;
 	private PatternManager patternManager;
 
-	// Use this for initialization
 	void Start () {
 		patternManager = GetComponent<PatternManager> ();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		if (Input.GetKeyDown(pattern [comboPhase])) {
 			// correct button pressed
+			patternManager.CorrectButtonPressed();
 			comboPhase++;
 		}
 		if (comboPhase == 4) {
@@ -25,10 +24,11 @@ public class DemonShooting : MonoBehaviour {
 			bulletrb.AddForce (transform.up * 200f);
 			Physics2D.IgnoreCollision (firedBullet.GetComponent<Collider2D> (), GetComponent<Collider2D> ());
 			comboPhase = 0;
+			patternManager.ShotFired();
 		}
 	}
 
-	public void newPattern(KeyCode[] pattern){
-		pattern = pattern;
+	public void NewPattern(KeyCode[] newPattern){
+		pattern = newPattern;
 	}
 }

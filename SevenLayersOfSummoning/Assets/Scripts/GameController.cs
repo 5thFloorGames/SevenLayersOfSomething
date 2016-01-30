@@ -56,11 +56,12 @@ public class GameController : MonoBehaviour {
 		KeyCode[] pattern1 = combo.newPatternPlayer1();
 		KeyCode[] pattern2 = combo.newPatternPlayer2();
 
-		shaman.GetComponent<ShamanShooting> ().newPattern(pattern1);
-		demon.GetComponent<DemonShooting> ().newPattern(pattern2);
-		
-		demon.GetComponent<PatternManager> ().NewPattern (pattern2);
+		shaman.GetComponent<ShamanShooting> ().NewPattern(pattern1);
 		shaman.GetComponent<PatternManager> ().NewPattern (pattern1);
+
+		demon.GetComponent<DemonShooting> ().NewPattern(pattern2);
+		demon.GetComponent<PatternManager> ().NewPattern (pattern2);
+
 
 		// Update combos
 
