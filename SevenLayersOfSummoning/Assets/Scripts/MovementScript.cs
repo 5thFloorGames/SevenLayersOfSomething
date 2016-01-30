@@ -22,6 +22,6 @@ public class MovementScript : MonoBehaviour {
 	}
 
 	public void BulletHit(){
-		print ("HIT!");
+		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().registerHit (tag);
 	}
 }
