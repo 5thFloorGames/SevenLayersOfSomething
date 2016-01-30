@@ -27,7 +27,7 @@ public class DemonShooting : MonoBehaviour {
 		if (comboPhase == 4) {
 			GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
 			Rigidbody2D bulletrb = firedBullet.GetComponent<Rigidbody2D> ();
-			bulletrb.AddForce (transform.up * 200f);
+			bulletrb.AddForce (transform.up * 300f);
 			Physics2D.IgnoreCollision (firedBullet.GetComponent<Collider2D> (), GetComponent<Collider2D> ());
 			comboPhase = 0;
 			patternManager.ShotFired();
