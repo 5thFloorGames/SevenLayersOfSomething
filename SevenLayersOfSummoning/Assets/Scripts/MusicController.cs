@@ -8,8 +8,10 @@ public class MusicController : MonoBehaviour {
 	public AudioSource[] shamanLayers;
 	private int shamanIndex = -1;
 	public AudioSource neutralLayer;
+	public AudioSource shamanStinger;
+	public AudioSource demonStinger;
 	private GameController gameController;
-	private int lastLayer = -1;
+	private int lastLayer = 4;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +24,7 @@ public class MusicController : MonoBehaviour {
 	}
 
 	public void updateLayer(int newLayer){
-		if (lastLayer == -1) {
+		if (lastLayer == newLayer) {
 			lastLayer = newLayer;
 			return;
 		}
@@ -54,7 +56,16 @@ public class MusicController : MonoBehaviour {
 		while (volume < 1f) {
 			volume += 0.01f;
 			source.volume = volume;
-			//print(source.time);
+			yield return new WaitForSeconds(0.00927f);
+		}
+	}
+
+	IEnumerator fadeIn(AudioSource source, int wait){
+		yield return new WaitForSeconds (wait);
+		float volume = 0f;
+		while (volume < 1f) {
+			volume += 0.01f;
+			source.volume = volume;
 			yield return new WaitForSeconds(0.00927f);
 		}
 	}
@@ -102,5 +113,34 @@ public class MusicController : MonoBehaviour {
 	void shamanToNeutral(){
 		removeShamanLayer ();
 		StartCoroutine(fadeIn (neutralLayer));
+	}
+
+	void removeShamanAndDemon(){
+		for (int i = 0; i < 3; i++) {
+			StartCoroutine(fadeOut(shamanLayers[i]));
+			StartCoroutine(fadeOut(demonLayers[i]));
+		}
+	}
+
+	void Quiet(){
+		for (int i = 0; i < 3; i++) {
+			shamanLayers[i].volume = 0;
+			demonLayers[i].volume = 0;
+		}
+		neutralLayer.volume = 0;
+	}
+
+	public void resetMusic(){
+		StartCoroutine (fadeIn (neutralLayer));
+	}
+
+	public void playStinger(string tag){
+		Quiet ();
+		if (tag == "Demon") {
+			demonStinger.Play();
+		} 
+		if (tag == "Shaman") {
+			shamanStinger.Play();
+		}
 	}
 }

@@ -33,6 +33,8 @@ public class GameController : MonoBehaviour {
 			if(layer == 0){
 				print ("Shaman wins!");
 				layer = 4;
+				music.playStinger("Shaman");
+				music.resetMusic();
 			}
 		}
 		if (tag == "Shaman") {
@@ -40,6 +42,8 @@ public class GameController : MonoBehaviour {
 			if(layer == 8){
 				print ("Demon wins!");
 				layer = 4;
+				music.playStinger("Demon");
+				music.resetMusic();
 			}
 		}
 		NewRound ();
@@ -51,7 +55,7 @@ public class GameController : MonoBehaviour {
 
 		DestroyBullets ();
 
-		demon.transform.position = new Vector3 (0f, 6.6f, 0f);
+		demon.transform.position = new Vector3 (0f, -6.6f, 0f);
 		shaman.transform.position = new Vector3 (0f, 3.5f, 0f);
 
 		KeyCode[] pattern1 = combo.newPatternPlayer1();

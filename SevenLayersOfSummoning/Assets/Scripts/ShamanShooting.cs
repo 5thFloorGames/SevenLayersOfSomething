@@ -7,18 +7,24 @@ public class ShamanShooting : MonoBehaviour {
 	private KeyCode[] pattern;
 	private int comboPhase = 0;
 	private PatternManager patternManager;
+	private AudioClip[] buttons;
+	private AudioClip[] wrongs;
+	private AudioSource audio;
 	
 	void Start () {
 		patternManager = GetComponent<PatternManager> ();
+		buttons = Resources.LoadAll<AudioClip>("Audio/Shaman/Button");
+		wrongs = Resources.LoadAll<AudioClip>("Audio/Shaman/Wrong");
+		audio = GetComponent<AudioSource> ();
 	}
 
 	void Update () {
 		if (Input.GetKeyDown((pattern [comboPhase]))) {
-			// correct button pressed
+			audio.PlayOneShot (buttons[Random.Range(0, buttons.Length)]);
 			patternManager.CorrectButtonPressed();
 			comboPhase++;
 		}
-		if (comboPhase == 4) {
+		if (comboPhase == 4 || Input.GetButtonDown("Fire1")) {
 			GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
 			Rigidbody2D bulletrb = firedBullet.GetComponent<Rigidbody2D> ();
 			bulletrb.AddForce (transform.up * (-1) * 200f);
