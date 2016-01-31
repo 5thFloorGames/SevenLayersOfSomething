@@ -12,10 +12,12 @@ public class GameController : MonoBehaviour {
 	public GameObject shamanPatterns;
 	public GameObject demonPatterns;
 	public GameObject hell;
+	private ScreenShake screenshake;
 
 	void Awake() {
 		demon = GameObject.Find ("Demon");
 		shaman = GameObject.Find ("Shaman");
+		screenshake = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<ScreenShake> ();
 	}
 
 	// Use this for initialization
@@ -31,6 +33,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void registerHit(string tag){
+		screenshake.jiggleCam (0.05f, 0.1f);
 		if (tag == "Demon") {
 			layer--;
 			if(layer == 0){
