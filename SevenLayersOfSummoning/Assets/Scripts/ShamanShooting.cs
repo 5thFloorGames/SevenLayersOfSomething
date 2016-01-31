@@ -27,7 +27,7 @@ public class ShamanShooting : MonoBehaviour {
 		if (comboPhase == 4 || Input.GetButtonDown("Fire1")) {
 			GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
 			Rigidbody2D bulletrgb = firedBullet.GetComponent<Rigidbody2D> ();
-			bulletrgb.AddForce (transform.up * (-1) * 300f);
+			bulletrgb.AddForce (transform.up * (-1) * 400f);
 			Physics2D.IgnoreCollision(firedBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 			comboPhase = 0;
 			patternManager.ShotFired();
