@@ -36,7 +36,7 @@ public class ShamanShooting : MonoBehaviour {
 				}
 			}
 			if (comboPhase == 4 || Input.GetButtonDown ("Fire1")) {
-				audio.PlayOneShot (shots [Random.Range (0, shots.Length)]);
+				audio.PlayOneShot (shots [Random.Range (0, shots.Length)], 0.5f);
 				GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
 				Rigidbody2D bulletrgb = firedBullet.GetComponent<Rigidbody2D> ();
 				bulletrgb.AddForce (transform.up * (-1) * 600f);

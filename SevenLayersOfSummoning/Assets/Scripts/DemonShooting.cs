@@ -37,7 +37,7 @@ public class DemonShooting : MonoBehaviour {
 				}
 			}
 			if (comboPhase == 4 || Input.GetButtonDown ("Fire2")) {
-				audio.PlayOneShot (shots [Random.Range (0, shots.Length)]);
+				audio.PlayOneShot (shots [Random.Range (0, shots.Length)], 0.5f);
 				GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
 				Rigidbody2D bulletrb = firedBullet.GetComponent<Rigidbody2D> ();
 				bulletrb.AddForce (transform.up * 600f);

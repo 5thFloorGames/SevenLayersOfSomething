@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	IEnumerator ShamanWin(){
+		DestroyBullets ();
 		BlockPlayers ();
 		music.Quiet ();
 		demon.transform.position = new Vector3 (shaman.transform.position.x + 3f, 3.3f,0f);
@@ -67,6 +68,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	IEnumerator DemonWin(){
+		DestroyBullets ();
 		BlockPlayers ();
 		music.Quiet ();
 		yield return new WaitForSeconds (1f);
@@ -99,7 +101,7 @@ public class GameController : MonoBehaviour {
 
 	void ResetGame(){
 		UnblockPlayers ();
-		shaman.SendMessage("StartAnimation");
+		shaman.SendMessage("StartgAnimation");
 		music.resetMusic();
 		layer = 4;
 		hell.transform.position = new Vector3(0f,-4.7f,0f);
