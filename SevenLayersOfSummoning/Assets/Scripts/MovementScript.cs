@@ -11,12 +11,14 @@ public class MovementScript : MonoBehaviour {
 	private AudioClip[] deaths;
 	private AudioSource audioSource;
 	private bool blocked = false;
+	private Animator animator;
 
 	// Use this for initialization
 	void Start () {
 		rigid = GetComponent<Rigidbody2D> ();
 		injuries = Resources.LoadAll<AudioClip> ("Audio/" + tag +"/Injury");
 		deaths = Resources.LoadAll<AudioClip> ("Audio/" + tag +"/Death");
+		animator = GetComponentInChildren<Animator> ();
 
 		audioSource = GetComponent<AudioSource> ();
 	}
@@ -25,6 +27,20 @@ public class MovementScript : MonoBehaviour {
 	void Update () {
 		if (!blocked) {
 			float input = Input.GetAxis ("MovementPlayer" + player);
+			if(Mathf.Abs(input) > 0.1f){
+				if(input > 0){
+					transform.rotation = new Quaternion(0f,180f,0f,0f);
+				} else {
+					transform.rotation = new Quaternion(0f,0f,0f,0f);
+				}
+				if(animator != null){
+					animator.SetBool("running", true);
+				}
+			} else {
+				if(animator != null){
+					animator.SetBool("running", false);
+				}
+			}
 			Vector2 newPosition = transform.position + Vector3.right * moveSpeed * input * Time.deltaTime;
 			newPosition.x = Mathf.Clamp (newPosition.x, -maxXposition, maxXposition);
 			transform.position = newPosition;
