@@ -36,9 +36,17 @@ public class MovementScript : MonoBehaviour {
 
 			if(Mathf.Abs(input) > 0.1f){
 				if(input > 0){
-					transform.rotation = new Quaternion(0f,180f,0f,0f);
+					if(tag == "Demon"){
+						transform.rotation = new Quaternion(0f,180f,0f,0f);
+					} else {
+						transform.rotation = new Quaternion(0f,0f,0f,0f);
+					}
 				} else {
-					transform.rotation = new Quaternion(0f,0f,0f,0f);
+					if(tag == "Shaman"){
+						transform.rotation = new Quaternion(0f,180f,0f,0f);
+					} else {
+						transform.rotation = new Quaternion(0f,0f,0f,0f);
+					}
 				}
 				if(animator != null){
 					animator.SetBool("running", true);
