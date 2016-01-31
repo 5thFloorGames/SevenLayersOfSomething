@@ -23,10 +23,10 @@ public class DemonShooting : MonoBehaviour {
 			audio.PlayOneShot (buttons [Random.Range (0, buttons.Length)]);
 			patternManager.CorrectButtonPressed ();
 			comboPhase++;
-		} else if (Input.anyKeyDown) {
+		} else if (JoystickKeyPressed()) {
 
 		}
-		if (comboPhase == 4) {
+		if (comboPhase == 4 || Input.GetButtonDown("Fire2")) {
 			GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
 			Rigidbody2D bulletrb = firedBullet.GetComponent<Rigidbody2D> ();
 			bulletrb.AddForce (transform.up * 300f);
@@ -34,6 +34,10 @@ public class DemonShooting : MonoBehaviour {
 			comboPhase = 0;
 			patternManager.ShotFired();
 		}
+	}
+
+	public bool JoystickKeyPressed(){
+
 	}
 
 	public void NewPattern(KeyCode[] newPattern){
