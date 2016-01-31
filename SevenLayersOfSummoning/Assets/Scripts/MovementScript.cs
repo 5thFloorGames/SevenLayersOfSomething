@@ -14,17 +14,17 @@ public class MovementScript : MonoBehaviour {
 	public AudioSource walkSound;
 	private bool blocked = false;
 	private Animator animator;
-
-	// Use this for initialization
+	private Transform spriteTransform;
+	
 	void Start () {
+		spriteTransform = transform.FindChild ("Sprite").transform;
 		rigid = GetComponent<Rigidbody2D> ();
 		injuries = Resources.LoadAll<AudioClip> ("Audio/" + tag +"/Injury");
 		deaths = Resources.LoadAll<AudioClip> ("Audio/" + tag +"/Death");
 		moves = Resources.LoadAll<AudioClip> ("Audio/" + tag +"/Move");
 		animator = GetComponentInChildren<Animator> ();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		if (!blocked) {
 			float input = Input.GetAxis ("MovementPlayer" + player);
@@ -43,15 +43,15 @@ public class MovementScript : MonoBehaviour {
 
 				if(input > 0){
 					if(tag == "Demon"){
-						transform.rotation = new Quaternion(0f,180f,0f,0f);
+						spriteTransform.rotation = new Quaternion(0f,180f,0f,0f);
 					} else {
-						transform.rotation = new Quaternion(0f,0f,0f,0f);
+						spriteTransform.rotation = new Quaternion(0f,0f,0f,0f);
 					}
 				} else {
 					if(tag == "Shaman"){
-						transform.rotation = new Quaternion(0f,180f,0f,0f);
+						spriteTransform.rotation = new Quaternion(0f,180f,0f,0f);
 					} else {
-						transform.rotation = new Quaternion(0f,0f,0f,0f);
+						spriteTransform.rotation = new Quaternion(0f,0f,0f,0f);
 					}
 				}
 				animator.SetBool("running", true);
@@ -71,7 +71,7 @@ public class MovementScript : MonoBehaviour {
 
 	public void Block(){
 		blocked = true;
-		transform.rotation = new Quaternion(0f,0f,0f,270f);
+		spriteTransform.rotation = new Quaternion(0f,0f,0f,270f);
 		animator.SetBool("running", false);
 	}
 
