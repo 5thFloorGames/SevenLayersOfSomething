@@ -112,7 +112,8 @@ public class MusicController : MonoBehaviour {
 		}
 	}
 
-	void Quiet(){
+	public void Quiet(){
+		StopAllCoroutines ();
 		for (int i = 0; i < 3; i++) {
 			shamanLayers[i].volume = 0;
 			demonLayers[i].volume = 0;
@@ -128,7 +129,6 @@ public class MusicController : MonoBehaviour {
 	}
 
 	public void playStinger(string tag){
-		Quiet ();
 		if (tag == "Demon") {
 			demonStinger.Play();
 		} 

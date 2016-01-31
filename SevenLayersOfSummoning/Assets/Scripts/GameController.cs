@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour {
 	private ComboCreator combo;
 	private GameObject demon;
 	private GameObject shaman;
+	public GameObject shamanPatterns;
+	public GameObject demonPatterns;
 	public GameObject hell;
 
 	void Awake() {
@@ -35,6 +37,7 @@ public class GameController : MonoBehaviour {
 				StartCoroutine(ShamanWin());
 			} else {
 				hell.transform.position += new Vector3(0f, 0.35f,0f);
+				NewRound();
 			}
 		}
 		if (tag == "Shaman") {
@@ -43,19 +46,27 @@ public class GameController : MonoBehaviour {
 				StartCoroutine(DemonWin());
 			} else {
 				hell.transform.position -= new Vector3(0f, 0.35f,0f);
+				NewRound ();
 			}
 		}
-		NewRound ();
 	}
 
 	IEnumerator ShamanWin(){
+		music.Quiet ();
 		BlockPlayers ();
+		demon.transform.position = new Vector3 (shaman.transform.position.x + 3f, 3.3f,0f);
 		music.playStinger("Shaman");
-		yield return new WaitForSeconds (5f);
+		yield return new WaitForSeconds (3f);
+		demon.SendMessage("Die");
+		yield return new WaitForSeconds (3f);
 		ResetGame ();
 	}
 
 	IEnumerator DemonWin(){
+		music.Quiet ();
+		yield return new WaitForSeconds (1f);
+		shaman.SendMessage("Die");
+		yield return new WaitForSeconds (1.5f);
 		BlockPlayers ();
 		music.playStinger("Demon");
 		yield return new WaitForSeconds (5f);
@@ -63,20 +74,27 @@ public class GameController : MonoBehaviour {
 	}
 
 	void BlockPlayers(){
+		shamanPatterns.SetActive (false);
+		demonPatterns.SetActive (false);
+
 		demon.SendMessage("Block");
 		shaman.SendMessage("Block");
 	}
 
 	void UnblockPlayers(){
+		shamanPatterns.SetActive (true);
+		demonPatterns.SetActive (true);
+		
 		demon.SendMessage("Unblock");
 		shaman.SendMessage("Unblock");
 	}
 
 	void ResetGame(){
-		music.resetMusic();
 		UnblockPlayers ();
+		music.resetMusic();
 		layer = 4;
 		hell.transform.position = new Vector3(0f,-4.7f,0f);
+		NewRound ();
 	}
 
 	void NewRound(){

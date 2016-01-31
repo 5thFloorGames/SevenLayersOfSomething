@@ -9,6 +9,7 @@ public class DemonShooting : MonoBehaviour {
 	private PatternManager patternManager;
 	private AudioClip[] buttons;
 	private AudioClip[] wrongs;
+	private AudioClip[] deaths;
 	private AudioSource audio;
 	private bool blocked = false;
 	

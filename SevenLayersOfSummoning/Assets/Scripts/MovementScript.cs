@@ -8,17 +8,16 @@ public class MovementScript : MonoBehaviour {
 	public int player = 1;
 	private float maxXposition = 10f;
 	private AudioClip[] injuries;
+	private AudioClip[] deaths;
 	private AudioSource audioSource;
 	private bool blocked = false;
 
 	// Use this for initialization
 	void Start () {
 		rigid = GetComponent<Rigidbody2D> ();
-		if (tag == "Demon") {
-			injuries = Resources.LoadAll<AudioClip> ("Audio/Demon/Injury");
-		} else {
-			injuries = Resources.LoadAll<AudioClip> ("Audio/Shaman/Injury");
-		}
+		injuries = Resources.LoadAll<AudioClip> ("Audio/" + tag +"/Injury");
+		deaths = Resources.LoadAll<AudioClip> ("Audio/" + tag +"/Death");
+
 		audioSource = GetComponent<AudioSource> ();
 	}
 	
@@ -43,5 +42,9 @@ public class MovementScript : MonoBehaviour {
 
 	public void Unblock(){
 		blocked = false;
+	}
+
+	public void Die(){
+		audioSource.PlayOneShot (deaths [Random.Range (0, deaths.Length)],1f);
 	}
 }
