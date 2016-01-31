@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8e0dc3063656548e990f3697012eea2c
-timeCreated: 1454196786
+timeCreated: 1454202735
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -58,7 +58,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
+        width: 40
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -66,9 +66,9 @@ TextureImporter:
     - name: thorns_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 40
         y: 0
-        width: 32
+        width: 40
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -76,9 +76,9 @@ TextureImporter:
     - name: thorns_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 80
         y: 0
-        width: 32
+        width: 40
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
