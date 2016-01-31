@@ -19,10 +19,12 @@ public class DemonShooting : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(pattern [comboPhase])) {
-			audio.PlayOneShot (buttons[Random.Range(0, buttons.Length)]);
-			patternManager.CorrectButtonPressed();
+		if (Input.GetKeyDown (pattern [comboPhase])) {
+			audio.PlayOneShot (buttons [Random.Range (0, buttons.Length)]);
+			patternManager.CorrectButtonPressed ();
 			comboPhase++;
+		} else if (Input.anyKeyDown) {
+
 		}
 		if (comboPhase == 4) {
 			GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
