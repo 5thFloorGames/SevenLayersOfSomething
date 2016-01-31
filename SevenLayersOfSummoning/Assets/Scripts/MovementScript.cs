@@ -48,13 +48,9 @@ public class MovementScript : MonoBehaviour {
 						transform.rotation = new Quaternion(0f,0f,0f,0f);
 					}
 				}
-				if(animator != null){
-					animator.SetBool("running", true);
-				}
+				animator.SetBool("running", true);
 			} else {
-				if(animator != null){
-					animator.SetBool("running", false);
-				}
+				animator.SetBool("running", false);
 			}
 			Vector2 newPosition = transform.position + Vector3.right * moveSpeed * input * Time.deltaTime;
 			newPosition.x = Mathf.Clamp (newPosition.x, -maxXposition, maxXposition);
@@ -70,9 +66,7 @@ public class MovementScript : MonoBehaviour {
 	public void Block(){
 		blocked = true;
 		transform.rotation = new Quaternion(0f,0f,0f,270f);
-		if(animator != null){
-			animator.SetBool("running", false);
-		}
+		animator.SetBool("running", false);
 	}
 
 	public void Unblock(){
@@ -84,14 +78,10 @@ public class MovementScript : MonoBehaviour {
 	}
 
 	public void StopAnimation(){
-		if (animator != null) {
-			animator.Stop();
-		}
+		animator.enabled = false;
 	}
 
 	public void StartAnimation(){
-		if (animator != null) {
-			animator.StartPlayback();
-		}
+		animator.enabled = true;
 	}
 }
