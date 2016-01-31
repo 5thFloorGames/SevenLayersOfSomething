@@ -24,7 +24,11 @@ public class DemonShooting : MonoBehaviour {
 			patternManager.CorrectButtonPressed ();
 			comboPhase++;
 		} else if (JoystickKeyPressed()) {
-
+			patternManager.WrongButtonPressed ();
+			comboPhase--;
+			if(comboPhase < 0){
+				comboPhase = 0;
+			}
 		}
 		if (comboPhase == 4 || Input.GetButtonDown("Fire2")) {
 			GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
@@ -37,7 +41,10 @@ public class DemonShooting : MonoBehaviour {
 	}
 
 	public bool JoystickKeyPressed(){
-		return true;
+		return Input.GetKeyDown(KeyCode.Joystick2Button0)
+			|| Input.GetKeyDown (KeyCode.Joystick2Button1)
+			|| Input.GetKeyDown (KeyCode.Joystick2Button2)
+			|| Input.GetKeyDown (KeyCode.Joystick2Button3);
 	}
 
 	public void NewPattern(KeyCode[] newPattern){

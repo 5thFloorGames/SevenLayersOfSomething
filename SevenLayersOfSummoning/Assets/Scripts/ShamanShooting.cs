@@ -23,6 +23,12 @@ public class ShamanShooting : MonoBehaviour {
 			audio.PlayOneShot (buttons[Random.Range(0, buttons.Length)]);
 			patternManager.CorrectButtonPressed();
 			comboPhase++;
+		} else if (JoystickKeyPressed()) {
+			patternManager.WrongButtonPressed ();
+			comboPhase--;
+			if(comboPhase < 0){
+				comboPhase = 0;
+			}
 		}
 		if (comboPhase == 4 || Input.GetButtonDown("Fire1")) {
 			GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
@@ -34,6 +40,12 @@ public class ShamanShooting : MonoBehaviour {
 		}
 	}
 
+	public bool JoystickKeyPressed(){
+		return Input.GetKeyDown(KeyCode.Joystick1Button0)
+			|| Input.GetKeyDown (KeyCode.Joystick1Button1)
+			|| Input.GetKeyDown (KeyCode.Joystick1Button2)
+			|| Input.GetKeyDown (KeyCode.Joystick1Button3);
+	}
 	
 	public void NewPattern(KeyCode[] newPattern){
 		comboPhase = 0;

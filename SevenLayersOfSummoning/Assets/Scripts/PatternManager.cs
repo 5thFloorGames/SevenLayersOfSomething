@@ -31,6 +31,14 @@ public class PatternManager : MonoBehaviour {
 		RefreshPattern ();
 	}
 
+	public void WrongButtonPressed() {
+		activeInt--;
+		if (activeInt < 0) {
+			activeInt = 0;
+		}
+		RefreshPattern ();
+	}
+	
 	public void ShotFired() {
 		activeInt = 0;
 		RefreshPattern ();
