@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class BulletScript : MonoBehaviour {
-
-	public GameObject effectPrefab;
+	
 	public Type type;
 
 	void Start () {
@@ -23,5 +22,6 @@ public class BulletScript : MonoBehaviour {
 	}
 
 	void BulletHit() {
+
 	}	
 }
