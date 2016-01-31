@@ -52,9 +52,10 @@ public class GameController : MonoBehaviour {
 	}
 
 	IEnumerator ShamanWin(){
-		music.Quiet ();
 		BlockPlayers ();
+		music.Quiet ();
 		demon.transform.position = new Vector3 (shaman.transform.position.x + 3f, 3.3f,0f);
+
 		music.playStinger("Shaman");
 		yield return new WaitForSeconds (3f);
 		demon.SendMessage("Die");

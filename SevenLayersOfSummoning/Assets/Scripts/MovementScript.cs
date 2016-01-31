@@ -27,6 +27,13 @@ public class MovementScript : MonoBehaviour {
 	void Update () {
 		if (!blocked) {
 			float input = Input.GetAxis ("MovementPlayer" + player);
+			if(Mathf.Abs(Input.GetAxis ("KeyboardMove" + player)) > 0.1f){
+				input = Input.GetAxis ("KeyboardMove" + player);
+			}
+			if(Mathf.Abs(Input.GetAxis ("MovementPlayer" + player)) > 0.1f){
+				input = Input.GetAxis ("MovementPlayer" + player);
+			}
+
 			if(Mathf.Abs(input) > 0.1f){
 				if(input > 0){
 					transform.rotation = new Quaternion(0f,180f,0f,0f);
@@ -54,6 +61,10 @@ public class MovementScript : MonoBehaviour {
 
 	public void Block(){
 		blocked = true;
+		transform.rotation = new Quaternion(0f,0f,0f,0f);
+		if(animator != null){
+			animator.SetBool("running", false);
+		}
 	}
 
 	public void Unblock(){
@@ -62,5 +73,5 @@ public class MovementScript : MonoBehaviour {
 
 	public void Die(){
 		audioSource.PlayOneShot (deaths [Random.Range (0, deaths.Length)],1f);
-	}
+	}	
 }
