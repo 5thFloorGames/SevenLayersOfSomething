@@ -23,7 +23,6 @@ public class ScreenShake : MonoBehaviour {
 	
 	// Others call this to cause an earthquake:
 	public void jiggleCam(float amt, float duration) {
-		// Amt is how many meters the camera shakes. 0.5 is noticable
 		jiggleAmt = amt;
 		StartCoroutine(jiggleCam2(duration));
 	}
