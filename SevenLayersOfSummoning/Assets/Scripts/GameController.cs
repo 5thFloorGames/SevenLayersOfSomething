@@ -101,7 +101,7 @@ public class GameController : MonoBehaviour {
 
 	void ResetGame(){
 		UnblockPlayers ();
-		shaman.SendMessage("StartgAnimation");
+		shaman.SendMessage("StartAnimation");
 		music.resetMusic();
 		layer = 4;
 		hell.transform.position = new Vector3(0f,-4.7f,0f);
