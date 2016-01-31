@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void registerHit(string tag){
-		screenshake.jiggleCam (0.05f, 0.1f);
+		screenshake.jiggleCam (0.15f, 0.125f);
 		if (tag == "Demon") {
 			layer--;
 			if(layer == 0){
@@ -72,6 +72,7 @@ public class GameController : MonoBehaviour {
 		yield return new WaitForSeconds (1f);
 		shaman.transform.position = new Vector3 (shaman.transform.position.x, 3.5f,0f);
 		shaman.transform.Rotate (0f, 0f, -90f);
+		shaman.SendMessage("StopAnimation");
 		shaman.SendMessage("Die");
 		yield return new WaitForSeconds (1.5f);
 
@@ -98,6 +99,7 @@ public class GameController : MonoBehaviour {
 
 	void ResetGame(){
 		UnblockPlayers ();
+		shaman.SendMessage("StartAnimation");
 		music.resetMusic();
 		layer = 4;
 		hell.transform.position = new Vector3(0f,-4.7f,0f);
@@ -112,8 +114,8 @@ public class GameController : MonoBehaviour {
 
 		shaman.transform.rotation = Quaternion.identity;
 
-		demon.transform.position = new Vector3 (0f, -6.6f, 0f);
-		shaman.transform.position = new Vector3 (0f, 3.9f, 0f);
+		demon.transform.position = new Vector3 (4f, -6.6f, 0f);
+		shaman.transform.position = new Vector3 (-4f, 3.9f, 0f);
 
 		KeyCode[] pattern1 = combo.newPatternPlayer1();
 		KeyCode[] pattern2 = combo.newPatternPlayer2();
