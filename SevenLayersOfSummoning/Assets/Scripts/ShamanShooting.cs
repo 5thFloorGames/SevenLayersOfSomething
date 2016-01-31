@@ -9,6 +9,7 @@ public class ShamanShooting : MonoBehaviour {
 	private PatternManager patternManager;
 	private AudioClip[] buttons;
 	private AudioClip[] wrongs;
+	private AudioClip[] shots;
 	private AudioSource audio;
 	private bool blocked = false;
 	
@@ -16,6 +17,7 @@ public class ShamanShooting : MonoBehaviour {
 		patternManager = GetComponent<PatternManager> ();
 		buttons = Resources.LoadAll<AudioClip>("Audio/Shaman/Button");
 		wrongs = Resources.LoadAll<AudioClip>("Audio/Shaman/Wrong");
+		shots = Resources.LoadAll<AudioClip>("Audio/Shaman/Shoot");
 		audio = GetComponent<AudioSource> ();
 	}
 
@@ -34,6 +36,7 @@ public class ShamanShooting : MonoBehaviour {
 				}
 			}
 			if (comboPhase == 4 || Input.GetButtonDown ("Fire1")) {
+				audio.PlayOneShot (shots [Random.Range (0, shots.Length)]);
 				GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
 				Rigidbody2D bulletrgb = firedBullet.GetComponent<Rigidbody2D> ();
 				bulletrgb.AddForce (transform.up * (-1) * 600f);

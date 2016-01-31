@@ -10,6 +10,7 @@ public class DemonShooting : MonoBehaviour {
 	private AudioClip[] buttons;
 	private AudioClip[] wrongs;
 	private AudioClip[] deaths;
+	private AudioClip[] shots;
 	private AudioSource audio;
 	private bool blocked = false;
 	
@@ -17,6 +18,7 @@ public class DemonShooting : MonoBehaviour {
 		patternManager = GetComponent<PatternManager> ();
 		buttons = Resources.LoadAll<AudioClip>("Audio/Demon/Button");
 		wrongs = Resources.LoadAll<AudioClip>("Audio/Demon/Wrong");
+		shots = Resources.LoadAll<AudioClip>("Audio/Demon/Shoot");
 		audio = GetComponent<AudioSource> ();
 	}
 
@@ -35,6 +37,7 @@ public class DemonShooting : MonoBehaviour {
 				}
 			}
 			if (comboPhase == 4 || Input.GetButtonDown ("Fire2")) {
+				audio.PlayOneShot (shots [Random.Range (0, shots.Length)]);
 				GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
 				Rigidbody2D bulletrb = firedBullet.GetComponent<Rigidbody2D> ();
 				bulletrb.AddForce (transform.up * 600f);
