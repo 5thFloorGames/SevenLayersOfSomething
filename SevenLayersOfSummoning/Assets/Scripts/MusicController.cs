@@ -60,16 +60,6 @@ public class MusicController : MonoBehaviour {
 		}
 	}
 
-	IEnumerator fadeIn(AudioSource source, int wait){
-		yield return new WaitForSeconds (wait);
-		float volume = 0f;
-		while (volume < 1f) {
-			volume += 0.01f;
-			source.volume = volume;
-			yield return new WaitForSeconds(0.00927f);
-		}
-	}
-
 	IEnumerator fadeOut(AudioSource source){
 		float volume = 1f;
 		while (volume > 0f) {
@@ -131,7 +121,7 @@ public class MusicController : MonoBehaviour {
 	}
 
 	public void resetMusic(){
-		StartCoroutine (fadeIn (neutralLayer, 2));
+		StartCoroutine(fadeIn(neutralLayer));
 		demonIndex = -1;
 		shamanIndex = -1;
 		lastLayer = 4;

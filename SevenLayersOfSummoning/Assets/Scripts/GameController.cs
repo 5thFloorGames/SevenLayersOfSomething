@@ -31,27 +31,52 @@ public class GameController : MonoBehaviour {
 	public void registerHit(string tag){
 		if (tag == "Demon") {
 			layer--;
-			hell.transform.position += new Vector3(0f, 0.35f,0f);
 			if(layer == 0){
-				print ("Shaman wins!");
-				layer = 4;
-				music.playStinger("Shaman");
-				music.resetMusic();
-				hell.transform.position = new Vector3(0f,-4.7f,0f);
+				StartCoroutine(ShamanWin());
+			} else {
+				hell.transform.position += new Vector3(0f, 0.35f,0f);
 			}
 		}
 		if (tag == "Shaman") {
 			layer++;
-			hell.transform.position -= new Vector3(0f, 0.35f,0f);
 			if(layer == 8){
-				print ("Demon wins!");
-				layer = 4;
-				music.playStinger("Demon");
-				music.resetMusic();
-				hell.transform.position = new Vector3(0f,-4.7f,0f);
+				StartCoroutine(DemonWin());
+			} else {
+				hell.transform.position -= new Vector3(0f, 0.35f,0f);
 			}
 		}
 		NewRound ();
+	}
+
+	IEnumerator ShamanWin(){
+		BlockPlayers ();
+		music.playStinger("Shaman");
+		yield return new WaitForSeconds (5f);
+		ResetGame ();
+	}
+
+	IEnumerator DemonWin(){
+		BlockPlayers ();
+		music.playStinger("Demon");
+		yield return new WaitForSeconds (5f);
+		ResetGame ();
+	}
+
+	void BlockPlayers(){
+		demon.SendMessage("Block");
+		shaman.SendMessage("Block");
+	}
+
+	void UnblockPlayers(){
+		demon.SendMessage("Unblock");
+		shaman.SendMessage("Unblock");
+	}
+
+	void ResetGame(){
+		music.resetMusic();
+		UnblockPlayers ();
+		layer = 4;
+		hell.transform.position = new Vector3(0f,-4.7f,0f);
 	}
 
 	void NewRound(){
@@ -71,11 +96,6 @@ public class GameController : MonoBehaviour {
 
 		demon.GetComponent<DemonShooting> ().NewPattern(pattern2);
 		demon.GetComponent<PatternManager> ().NewPattern (pattern2);
-
-
-		// Update combos
-
-		// Countdown
 	}
 
 	void DestroyBullets(){

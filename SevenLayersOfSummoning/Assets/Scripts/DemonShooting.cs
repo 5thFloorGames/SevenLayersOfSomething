@@ -10,7 +10,8 @@ public class DemonShooting : MonoBehaviour {
 	private AudioClip[] buttons;
 	private AudioClip[] wrongs;
 	private AudioSource audio;
-
+	private bool blocked = false;
+	
 	void Start () {
 		patternManager = GetComponent<PatternManager> ();
 		buttons = Resources.LoadAll<AudioClip>("Audio/Demon/Button");
@@ -19,24 +20,27 @@ public class DemonShooting : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown (pattern [comboPhase])) {
-			audio.PlayOneShot (buttons [Random.Range (0, buttons.Length)]);
-			patternManager.CorrectButtonPressed ();
-			comboPhase++;
-		} else if (JoystickKeyPressed()) {
-			patternManager.WrongButtonPressed ();
-			comboPhase--;
-			if(comboPhase < 0){
-				comboPhase = 0;
+		if (!blocked) {
+			if (Input.GetKeyDown (pattern [comboPhase])) {
+				audio.PlayOneShot (buttons [Random.Range (0, buttons.Length)]);
+				patternManager.CorrectButtonPressed ();
+				comboPhase++;
+			} else if (JoystickKeyPressed ()) {
+				audio.PlayOneShot (wrongs [Random.Range (0, wrongs.Length)]);
+				patternManager.WrongButtonPressed ();
+				comboPhase--;
+				if (comboPhase < 0) {
+					comboPhase = 0;
+				}
 			}
-		}
-		if (comboPhase == 4 || Input.GetButtonDown("Fire2")) {
-			GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
-			Rigidbody2D bulletrb = firedBullet.GetComponent<Rigidbody2D> ();
-			bulletrb.AddForce (transform.up * 400f);
-			Physics2D.IgnoreCollision (firedBullet.GetComponent<Collider2D> (), GetComponent<Collider2D> ());
-			comboPhase = 0;
-			patternManager.ShotFired();
+			if (comboPhase == 4 || Input.GetButtonDown ("Fire2")) {
+				GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
+				Rigidbody2D bulletrb = firedBullet.GetComponent<Rigidbody2D> ();
+				bulletrb.AddForce (transform.up * 600f);
+				Physics2D.IgnoreCollision (firedBullet.GetComponent<Collider2D> (), GetComponent<Collider2D> ());
+				comboPhase = 0;
+				patternManager.ShotFired ();
+			}
 		}
 	}
 
@@ -50,5 +54,13 @@ public class DemonShooting : MonoBehaviour {
 	public void NewPattern(KeyCode[] newPattern){
 		comboPhase = 0;
 		pattern = newPattern;
+	}
+
+	public void Block(){
+		blocked = true;
+	}
+	
+	public void Unblock(){
+		blocked = false;
 	}
 }
