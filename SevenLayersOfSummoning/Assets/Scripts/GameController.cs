@@ -63,11 +63,11 @@ public class GameController : MonoBehaviour {
 	}
 
 	IEnumerator DemonWin(){
+		BlockPlayers ();
 		music.Quiet ();
 		yield return new WaitForSeconds (1f);
 		shaman.SendMessage("Die");
 		yield return new WaitForSeconds (1.5f);
-		BlockPlayers ();
 		music.playStinger("Demon");
 		yield return new WaitForSeconds (5f);
 		ResetGame ();
