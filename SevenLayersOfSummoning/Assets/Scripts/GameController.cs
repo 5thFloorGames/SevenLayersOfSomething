@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour {
 		DestroyBullets ();
 		BlockPlayers ();
 		music.Quiet ();
-		demon.transform.position = new Vector3 (shaman.transform.position.x + 3f, 3.3f,0f);
+		demon.transform.position = new Vector3 (shaman.transform.position.x + 3f, 3.4f,0f);
 
 		music.playStinger("Shaman");
 		yield return new WaitForSeconds (3f);
@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour {
 		shaman.SendMessage("StopAnimation");
 		yield return new WaitForSeconds (1.5f);
 		music.playStinger("Demon");
-		shaman.transform.position = new Vector3 (shaman.transform.position.x, 3.5f,0f);
+		shaman.transform.position = new Vector3 (shaman.transform.position.x, 3.8f,0f);
 		shaman.transform.Rotate (0f, 0f, -90f);
 		yield return new WaitForSeconds (5f);
 		ResetGame ();
@@ -117,7 +117,7 @@ public class GameController : MonoBehaviour {
 		shaman.transform.rotation = Quaternion.identity;
 
 		demon.transform.position = new Vector3 (4f, -6.6f, 0f);
-		shaman.transform.position = new Vector3 (-4f, 3.9f, 0f);
+		shaman.transform.position = new Vector3 (-4f, 4.2f, 0f);
 
 		KeyCode[] pattern1 = combo.newPatternPlayer1();
 		KeyCode[] pattern2 = combo.newPatternPlayer2();

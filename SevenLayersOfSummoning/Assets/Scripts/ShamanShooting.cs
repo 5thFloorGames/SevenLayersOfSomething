@@ -24,7 +24,7 @@ public class ShamanShooting : MonoBehaviour {
 	void Update () {
 		if (!blocked) {
 			if (Input.GetKeyDown ((pattern [comboPhase]))) {
-				audio.PlayOneShot (buttons [Random.Range (0, buttons.Length)]);
+				audio.PlayOneShot (buttons [Random.Range (0, buttons.Length)], 0.3f);
 				patternManager.CorrectButtonPressed ();
 				comboPhase++;
 			} else if (JoystickKeyPressed ()) {
@@ -36,7 +36,7 @@ public class ShamanShooting : MonoBehaviour {
 				}
 			}
 			if (comboPhase == 4 || Input.GetButtonDown ("Fire1")) {
-				audio.PlayOneShot (shots [Random.Range (0, shots.Length)], 0.5f);
+				audio.PlayOneShot (shots [Random.Range (0, shots.Length)], 0.25f);
 				GameObject firedBullet = (GameObject)Instantiate (bullet, transform.position, transform.rotation);
 				Rigidbody2D bulletrgb = firedBullet.GetComponent<Rigidbody2D> ();
 				bulletrgb.AddForce (transform.up * (-1) * 600f);
