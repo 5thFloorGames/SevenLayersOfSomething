@@ -30,9 +30,7 @@ public class MovementScript : MonoBehaviour {
 	}
 
 	public void BulletHit(){
-		if (injuries.Length > 0) {
-			audioSource.PlayOneShot (injuries [Random.Range (0, injuries.Length)]);
-		}
+		audioSource.PlayOneShot (injuries [Random.Range (0, injuries.Length)]);
 		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().registerHit (tag);
 	}
 }

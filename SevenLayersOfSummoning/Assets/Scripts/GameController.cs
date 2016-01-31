@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour {
 		DestroyBullets ();
 
 		demon.transform.position = new Vector3 (0f, -6.6f, 0f);
-		shaman.transform.position = new Vector3 (0f, 3.5f, 0f);
+		shaman.transform.position = new Vector3 (0f, 3.9f, 0f);
 
 		KeyCode[] pattern1 = combo.newPatternPlayer1();
 		KeyCode[] pattern2 = combo.newPatternPlayer2();
