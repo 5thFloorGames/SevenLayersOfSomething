@@ -37,7 +37,7 @@ public class DemonShooting : MonoBehaviour {
 	}
 
 	public bool JoystickKeyPressed(){
-
+		return true;
 	}
 
 	public void NewPattern(KeyCode[] newPattern){
