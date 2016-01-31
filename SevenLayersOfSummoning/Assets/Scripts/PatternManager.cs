@@ -83,6 +83,9 @@ public class PatternManager : MonoBehaviour {
 		shapeList = new Transform[4];
 		int i = 0;
 		foreach (Transform shape in transform.FindChild("Patterns")) {
+			if (shape.name == "CastingCircle") {
+				continue;
+			}
 			shapeList[i] = shape;
 			shape.GetComponent<Image> ().sprite = cross;
 			shape.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
