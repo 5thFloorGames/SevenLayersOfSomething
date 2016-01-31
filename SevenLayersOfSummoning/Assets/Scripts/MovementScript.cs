@@ -9,7 +9,9 @@ public class MovementScript : MonoBehaviour {
 	private float maxXposition = 10f;
 	private AudioClip[] injuries;
 	private AudioClip[] deaths;
-	private AudioSource audioSource;
+	private AudioClip[] moves;
+	public AudioSource audioSource;
+	public AudioSource walkSound;
 	private bool blocked = false;
 	private Animator animator;
 
@@ -18,9 +20,8 @@ public class MovementScript : MonoBehaviour {
 		rigid = GetComponent<Rigidbody2D> ();
 		injuries = Resources.LoadAll<AudioClip> ("Audio/" + tag +"/Injury");
 		deaths = Resources.LoadAll<AudioClip> ("Audio/" + tag +"/Death");
+		moves = Resources.LoadAll<AudioClip> ("Audio/" + tag +"/Move");
 		animator = GetComponentInChildren<Animator> ();
-
-		audioSource = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -35,6 +36,11 @@ public class MovementScript : MonoBehaviour {
 			}
 
 			if(Mathf.Abs(input) > 0.1f){
+				if(!walkSound.isPlaying){
+					walkSound.clip = moves[Random.Range(0,moves.Length)];
+					walkSound.Play ();
+				}
+
 				if(input > 0){
 					if(tag == "Demon"){
 						transform.rotation = new Quaternion(0f,180f,0f,0f);
