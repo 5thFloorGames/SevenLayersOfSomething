@@ -69,7 +69,7 @@ public class MovementScript : MonoBehaviour {
 
 	public void Block(){
 		blocked = true;
-		transform.rotation = new Quaternion(0f,0f,0f,0f);
+		transform.rotation = new Quaternion(0f,0f,0f,270f);
 		if(animator != null){
 			animator.SetBool("running", false);
 		}
@@ -81,5 +81,17 @@ public class MovementScript : MonoBehaviour {
 
 	public void Die(){
 		audioSource.PlayOneShot (deaths [Random.Range (0, deaths.Length)],1f);
-	}	
+	}
+
+	public void StopAnimation(){
+		if (animator != null) {
+			animator.Stop();
+		}
+	}
+
+	public void StartAnimation(){
+		if (animator != null) {
+			animator.StartPlayback();
+		}
+	}
 }

@@ -67,8 +67,11 @@ public class GameController : MonoBehaviour {
 		BlockPlayers ();
 		music.Quiet ();
 		yield return new WaitForSeconds (1f);
+		shaman.transform.position = new Vector3 (shaman.transform.position.x, 3.5f,0f);
+		shaman.transform.Rotate (0f, 0f, -90f);
 		shaman.SendMessage("Die");
 		yield return new WaitForSeconds (1.5f);
+
 		music.playStinger("Demon");
 		yield return new WaitForSeconds (5f);
 		ResetGame ();
@@ -103,6 +106,8 @@ public class GameController : MonoBehaviour {
 		music.updateLayer (layer);
 
 		DestroyBullets ();
+
+		shaman.transform.rotation = Quaternion.identity;
 
 		demon.transform.position = new Vector3 (0f, -6.6f, 0f);
 		shaman.transform.position = new Vector3 (0f, 3.9f, 0f);
